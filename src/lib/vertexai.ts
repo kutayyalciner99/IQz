@@ -1,6 +1,3 @@
-import { GoogleAuth } from 'google-auth-library';
-import * as fs from 'fs';
-import * as path from 'path';
 
 const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT;
 const LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'us-central1';
@@ -38,17 +35,8 @@ export async function callVertexAI(prompt: string): Promise<string> {
       throw new Error('GOOGLE_APPLICATION_CREDENTIALS environment variable is not set');
     }
 
-    const credentials = JSON.parse(
-      fs.readFileSync(path.resolve(credentialsPath), 'utf8')
-    );
 
-    const auth = new GoogleAuth({
-      credentials,
-      scopes: ['https://www.googleapis.com/auth/cloud-platform']
-    });
-
-    const client = await auth.getClient();
-    const accessToken = "ya29.a0AeDClZAe2j0TnzHqrpb0m18_RbKTp3JDAeEGrxRB_h0-mFk2zmWLkjGo3K_z-yqNQErW9Fuk17zzks1YPmVk6UOddHOaFO0vYSsoQc44yJGZ99qVSLYWL1ncoDvPSQL5bMiOJAi7lVhrV7u6ol83dS0FDbjpgNKjfQcRKbchTgaCgYKAWESARASFQHGX2Mi15DxIWR3ETuLxhO3cuOFEg0177"
+    const accessToken = "ya29.a0AeDClZBvuZ215PCEtJe0_FuQBD-TM5BiQUE39x1uetFKadbUzNyiuzrPnrJKS-NgQnNYPQAcrzQsD07uvIYI62WXyp1V24ubOBwMQq9A7FHXUPajlq6CoF_JeUOXqBk1wK1a71B1HnzZOeQn5lhzj00Qsu1FioOdCptVKesi9waCgYKAdcSARASFQHGX2MiRBgwYRaEP5pg5iO6AjbQbg0177"
 
     if (!PROJECT_ID) {
       throw new Error('GOOGLE_CLOUD_PROJECT environment variable is not set');

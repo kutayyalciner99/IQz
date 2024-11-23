@@ -1,12 +1,7 @@
 import { NextResponse } from 'next/server';
 import { callVertexAI } from '@/lib/vertexai';
 
-interface Topic {
-  subject: string;
-  deadline: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  estimatedHours: number;
-}
+
 
 export async function POST(req: Request) {
   try {
@@ -60,7 +55,7 @@ Important guidelines:
     const response = await callVertexAI(prompt);
     console.log('Received response from Vertex AI:', response);
 
-    let cleanResponse = response
+    const cleanResponse = response
       .replace(/```json\n?/g, '')
       .replace(/```\n?/g, '')
       .trim();
@@ -72,9 +67,14 @@ Important guidelines:
       if (!parsedResponse.blocks || !Array.isArray(parsedResponse.blocks)) {
         throw new Error('Invalid response format: missing blocks array');
       }
-
-      // Validate each block
-      parsedResponse.blocks.forEach((block: any, index: number) => {
+      interface SchedulerBlock {
+        date: string;
+        timeSlot: string;
+        topic: string;
+        activity: string;
+        duration: number | string;
+      }
+      parsedResponse.blocks.forEach((block: SchedulerBlock, index: number) => {
         if (!block.date || !block.timeSlot || !block.topic || !block.activity || !block.duration) {
           throw new Error(`Invalid block format at index ${index}`);
         }

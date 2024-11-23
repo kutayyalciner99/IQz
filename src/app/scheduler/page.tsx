@@ -6,6 +6,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Link from 'next/link';
+
 import React, { useState } from 'react';
 
 import {
@@ -122,12 +124,12 @@ export default function SchedulePlanner() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <a href="/" className="inline-block mb-4">
+      <Link href="/" className="inline-block mb-4">
         <Button variant="ghost" className="gap-2">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Button>
-      </a>
+      </Link>
 
       <Card className="p-6">
         <div className="space-y-6">

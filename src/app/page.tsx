@@ -11,7 +11,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-slate-50 p-8">
 
       <div className="max-w-4xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-center mb-12">Learning Tools</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">IQz</h1>
 
         <div className="grid md:grid-cols-3 gap-4">
           <Card className="p-6 hover:shadow-lg transition-shadow">

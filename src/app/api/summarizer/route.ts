@@ -52,45 +52,17 @@ Requirements:
 3. Maintain core message
 4. No explanatory phrases or meta-text`;
 
-    try {
-      const summary = await callVertexAI(prompt);
+    const summary = await callVertexAI(prompt);
 
-      // Clean up the response
-      const cleanSummary = summary
-        .replace(/^Summary:?\s*/i, '')
-        .replace(/^Here's a summary:?\s*/i, '')
-        .replace(/```/g, '')
-        .trim();
+    // Clean up the response
+    const cleanSummary = summary
+      .replace(/^Summary:?\s*/i, '')
+      .replace(/^Here's a summary:?\s*/i, '')
+      .replace(/```/g, '')
+      .trim();
 
-      return NextResponse.json({ summary: cleanSummary });
+    return NextResponse.json({ summary: cleanSummary });
 
-    } catch (aiError: any) {
-      console.error('Vertex AI Error:', aiError);
-
-      // Handle rate limit errors specifically
-      if (aiError.message?.includes('429') || aiError.message?.includes('RESOURCE_EXHAUSTED')) {
-        return NextResponse.json(
-          {
-            error: 'Service is currently busy. Please try again in a few moments.',
-            retryAfter: 5000 // Suggest retry after 5 seconds
-          },
-          {
-            status: 429,
-            headers: {
-              'Retry-After': '5'
-            }
-          }
-        );
-      }
-
-      return NextResponse.json(
-        {
-          error: 'Failed to generate summary',
-          details: aiError instanceof Error ? aiError.message : 'AI service error'
-        },
-        { status: 500 }
-      );
-    }
 
   } catch (error) {
     console.error('API Route Error:', error);

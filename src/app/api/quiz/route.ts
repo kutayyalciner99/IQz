@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import { callVertexAI } from '@/lib/vertexai';
-import * as fs from 'fs';
-import * as path from 'path';
 
 interface QuizQuestion {
   question: string;
@@ -77,7 +75,7 @@ To ensure uniqueness:
     const response = await callVertexAI(prompt);
     console.log('Received response from Vertex AI:', response);
 
-    let cleanResponse = response
+    const cleanResponse = response
       .replace(/```json\n?/g, '')
       .replace(/```\n?/g, '')
       .trim();

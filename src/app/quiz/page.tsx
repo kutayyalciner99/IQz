@@ -6,6 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 import {
   Select,
   SelectContent,
@@ -170,12 +171,12 @@ export default function QuizPage() {
 
   return (
     <div className="container mx-auto p-4 max-w-3xl">
-      <a href="/" className="inline-block mb-4">
-        <Button variant="ghost" className="gap-2">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Home
-        </Button>
-      </a>
+     <Link href="/" className="inline-block mb-4">
+  <Button variant="ghost" className="gap-2">
+    <ArrowLeft className="h-4 w-4" />
+    Back to Home
+  </Button>
+</Link>
 
       <Card className="p-6">
         {!quizStarted ? (
@@ -184,7 +185,7 @@ export default function QuizPage() {
               <Label htmlFor="topic">Quiz Topic</Label>
               <Input
                 id="topic"
-                placeholder="Enter a topic (e.g., Solar System, World War II, Programming)"
+                placeholder="Enter a topic (e.g., Linear Algebra, Cells, Programming)"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
               />

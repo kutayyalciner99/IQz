@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -69,13 +69,10 @@ const SummarizerPage = () => {
     };
 
     const copyToClipboard = async () => {
-        try {
             await navigator.clipboard.writeText(summary);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-            setError('Failed to copy to clipboard');
-        }
+        
     };
 
     // Clean up timeout on unmount
